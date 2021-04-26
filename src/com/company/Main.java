@@ -4,9 +4,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Main {
-    private int V; // No of vertices
-    private LinkedList<Integer> adj[]; // Adjacency Lists
+    /* number of vertices */
+    private int V;
 
+    /*
+    * Adjacency Lists
+    * */
+    private LinkedList<Integer> adj[]; //
+
+    /*
+    * Constructor
+    * param v <- ( int )
+    * */
     Main(int v){
         V = v;
         adj = new LinkedList[v];
@@ -15,24 +24,42 @@ public class Main {
         }
     }
 
+    /*
+    * Add Edges to, from
+    * x <- ( int )
+    * y <- ( int )
+    * */
     void edges(int x, int y){
         adj[x].add(y);
     }
 
+    /**
+     * Algorithm BFS ( Breadth First Search )
+     * s <- ( int )
+     * */
     void BFS(int s){
+        // Mark all the vertices as not visited(By default set as false)
         boolean visited[] = new boolean[V];
+
+        //Create a queue for BFS
 
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
+        //Mark the current node as visited and enqueue it
         visited[s] = true;
         queue.add(s);
 
         while(queue.size() != 0){
+            // Dequeue a vertex from queue and print it
             s = queue.poll();
             System.out.print(s+ " ");
 
+            /**
+             * Get all adjacent vertices of the dequeued vertex "s"
+             * If a adjacent has not been visited, then mark it
+             * visited and enqueue it.
+             * */
             Iterator<Integer> i = adj[s].listIterator();
-
             while(i.hasNext()){
                 int n = i.next();
                 if(!visited[n]){
